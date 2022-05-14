@@ -9,7 +9,10 @@ func main() {
 	fmt.Println("Go Kudu Library")
 
 	client := kudu.NewClientBuilder()
-	//client.AddMasterServerAddr("localhost")
+	client.AddMasterServerAddr("127.0.0.1")
 	c, i := client.Build()
+
 	fmt.Println(c, i)
+
+	fmt.Println(kudu.TestPB())
 }
