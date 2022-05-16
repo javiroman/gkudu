@@ -17,10 +17,10 @@
 syntax = "proto2";
 package kudu.consensus;
 
-//option go_package = "org.apache.kudu.consensus";
-option go_package = "github.com/javiroman/gkudu";
+option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/consensus";
 
-import "common.proto";
+import "kudu/common/common.proto";
+
 
 // ===========================================================================
 //  Consensus Metadata

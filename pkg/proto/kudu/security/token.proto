@@ -17,10 +17,9 @@
 syntax = "proto2";
 package kudu.security;
 
-//option go_package = "org.apache.kudu.security";
-option go_package = "github.com/javiroman/gkudu";
+option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/security";
 
-import "pb_util.proto";
+import "kudu/util/pb_util.proto";
 
 message ColumnPrivilegePB {
   // If set, the user has privileges to select and apply predicates on the

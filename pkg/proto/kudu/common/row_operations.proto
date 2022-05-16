@@ -22,10 +22,9 @@
 syntax = "proto2";
 package kudu;
 
-//option go_package = "org.apache.kudu";
-option go_package = "github.com/javiroman/gkudu";
+option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/common";
 
-import "pb_util.proto";
+import "kudu/util/pb_util.proto";
 
 // A set of operations (INSERT, UPDATE, UPSERT, or DELETE) to apply to a table,
 // or the set of split rows and range bounds when creating or altering table.

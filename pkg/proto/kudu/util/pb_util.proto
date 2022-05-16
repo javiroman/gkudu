@@ -17,8 +17,7 @@
 syntax = "proto2";
 package kudu;
 
-//option go_package = "org.apache.kudu";
-option go_package = "github.com/javiroman/gkudu";
+option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/util";
 
 import "google/protobuf/descriptor.proto";
 

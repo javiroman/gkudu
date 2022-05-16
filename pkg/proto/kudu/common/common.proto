@@ -26,14 +26,13 @@
 syntax = "proto2";
 package kudu;
 
-//option go_package = "org.apache.kudu";
-option go_package = "github.com/javiroman/gkudu";
+option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/common";
 
-import "row_operations.proto";
-import "block_bloom_filter.proto";
-import "compression.proto";
-import "hash.proto";
-import "pb_util.proto";
+import "kudu/common/row_operations.proto";
+import "kudu/util/block_bloom_filter.proto";
+import "kudu/util/compression/compression.proto";
+import "kudu/util/hash.proto";
+import "kudu/util/pb_util.proto";
 
 // If you add a new type keep in mind to add it to the end
 // or update AddMapping() functions like the one in key_encoder.cc

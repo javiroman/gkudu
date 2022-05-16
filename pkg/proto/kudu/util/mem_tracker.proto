@@ -1,3 +1,4 @@
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements.  See the NOTICE file
 // distributed with this work for additional information
@@ -17,14 +18,22 @@
 syntax = "proto2";
 package kudu;
 
-//option go_package = "org.apache.kudu";
-option go_package = "github.com/javiroman/gkudu";
+option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/util";
 
-enum CompressionType {
-  UNKNOWN_COMPRESSION = 999;
-  DEFAULT_COMPRESSION = 0;
-  NO_COMPRESSION = 1;
-  SNAPPY = 2;
-  LZ4 = 3;
-  ZLIB = 4;
+// A snapshot of a Kudu server mem_tracker tree.
+// Note that recursive messages are not a good idea in general because
+// serializing a message requires knowing the size of its sub-messages.
+// However, the mem_tracker tree is a wide and shallow tree, with a maximum
+// depth of 3 realized by, e.g., the path
+//
+// root -> server -> tablet-<id> -> DeltaMemStores
+//
+// This could change in the future, however.
+message MemTrackerPB {
+  optional string id = 1;
+  optional string parent_id = 2;
+  optional int64 limit = 3;
+  optional int64 current_consumption = 4;
+  optional int64 peak_consumption = 5;
+  repeated MemTrackerPB child_trackers = 6;
 }

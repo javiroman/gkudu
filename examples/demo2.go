@@ -1,7 +1,6 @@
 package main
 
 import "fmt"
-import ".."
 
 const kTableName = "test"
 
@@ -91,7 +90,7 @@ func main() {
 			panic(err)
 		}
 		for batch.Next() {
-			fmt.Println("row: ", batch.RowToString())
+			fmt.Println("wire: ", batch.RowToString())
 		}
 	}
 }
