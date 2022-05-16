@@ -22,7 +22,7 @@ package kudu.client;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/client";
 
 import "kudu/common/common.proto";
-import "kudu/consensus/metadata.proto";
+// JAVI import "kudu/consensus/metadata.proto";
 import "kudu/security/token.proto";
 import "kudu/util/pb_util.proto";
 
@@ -57,6 +57,7 @@ message ServerMetadataPB {
   optional string location = 3;
 }
 
+
 // All of the metadata required to create a RemoteTablet object in the C++
 // and Java clients.
 message TabletMetadataPB {
@@ -71,7 +72,7 @@ message TabletMetadataPB {
   message ReplicaMetadataPB {
       // The index of the tablet server in tablet_servers.
       required uint32 ts_idx = 1;
-      required consensus.RaftPeerPB.Role role = 2;
+      // JAVI required consensus.RaftPeerPB.Role role = 2;
       optional string dimension_label = 3;
   }
 

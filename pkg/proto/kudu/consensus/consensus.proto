@@ -20,7 +20,6 @@ package kudu.consensus;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/consensus";
 
 import "kudu/common/common.proto";
-import "kudu/common/wire_protocol.proto";
 import "kudu/consensus/metadata.proto";
 import "kudu/consensus/opid.proto";
 import "kudu/consensus/replica_management.proto";

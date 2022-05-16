@@ -23,7 +23,7 @@ package kudu.subprocess;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/subprocess";
 
 import "google/protobuf/any.proto";
-import "kudu/common/wire_protocol.proto";
+import "kudu/common/common.proto";
 
 // EchoResponsePB simply echoes the data in EchoRequestPB as a response.
 message EchoRequestPB {

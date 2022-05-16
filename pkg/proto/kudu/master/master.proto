@@ -20,8 +20,6 @@ package kudu.master;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/master";
 
 import "kudu/common/common.proto";
-import "kudu/common/row_operations.proto";
-import "kudu/common/wire_protocol.proto";
 import "kudu/consensus/metadata.proto";
 import "kudu/consensus/replica_management.proto";
 import "kudu/rpc/rpc_header.proto";

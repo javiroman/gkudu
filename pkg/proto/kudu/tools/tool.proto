@@ -21,7 +21,6 @@ option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/tools";
 
 
 import "kudu/common/common.proto";
-import "kudu/common/wire_protocol.proto";
 import "kudu/tablet/metadata.proto";
 import "kudu/tablet/tablet.proto";
 
