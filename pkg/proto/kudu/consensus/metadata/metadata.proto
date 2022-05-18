@@ -15,9 +15,9 @@
 // specific language governing permissions and limitations
 // under the License.
 syntax = "proto2";
-package kudu.consensus;
+package kudu.consensus.metadata;
 
-option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/consensus";
+option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/consensus/metadata";
 
 import "kudu/common/common.proto";
 

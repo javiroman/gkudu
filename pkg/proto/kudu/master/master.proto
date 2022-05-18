@@ -20,7 +20,7 @@ package kudu.master;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/master";
 
 import "kudu/common/common.proto";
-import "kudu/consensus/metadata.proto";
+import "kudu/consensus/metadata/metadata.proto";
 import "kudu/consensus/replica_management.proto";
 import "kudu/rpc/rpc_header.proto";
 import "kudu/security/token.proto";
@@ -137,7 +137,7 @@ message SysTabletsEntryPB {
   optional PartitionPB partition = 7;
 
   // The latest consensus state reported to the Master.
-  optional consensus.ConsensusStatePB consensus_state = 3;
+  optional consensus.metadata.ConsensusStatePB consensus_state = 3;
 
   // Debug state for the tablet.
   optional State state = 4 [ default = UNKNOWN ];
@@ -281,7 +281,7 @@ message ReportedTabletPB {
   // The latest consensus state.
   // This will be missing if the tablet is not in a RUNNING state
   // (i.e. if it is BOOTSTRAPPING).
-  optional consensus.ConsensusStatePB consensus_state = 3;
+  optional consensus.metadata.ConsensusStatePB consensus_state = 3;
 
   optional AppStatusPB error = 4;
   optional uint32 schema_version = 5;
@@ -416,14 +416,14 @@ message TabletLocationsPB {
   // Remove 'ReplicaPB' when we stop using it internally.
   message DEPRECATED_ReplicaPB {
     required TSInfoPB ts_info = 1;
-    required consensus.RaftPeerPB.Role role = 2;
+    required consensus.metadata.RaftPeerPB.Role role = 2;
     optional string dimension_label = 3;
   }
 
   message InternedReplicaPB {
     // Index into the 'ts_infos' list in the top-level RPC response.
     required uint32 ts_info_idx = 1;
-    required consensus.RaftPeerPB.Role role = 2;
+    required consensus.metadata.RaftPeerPB.Role role = 2;
     optional string dimension_label = 3;
   }
 
@@ -852,7 +852,7 @@ message ConnectToMasterResponsePB {
   optional MasterErrorPB error = 1;
 
   // The current role of the master.
-  optional consensus.RaftPeerPB.Role role = 2;
+  optional consensus.metadata.RaftPeerPB.Role role = 2;
 
   // Any CA certs used by the cluster. Currently the master only uses
   // one cert, but we may support rolling this cert in the future, so
@@ -1026,7 +1026,7 @@ message GetMasterRegistrationResponsePB {
   optional ServerRegistrationPB registration = 2;
 
   // This server's role in the consensus configuration.
-  optional consensus.RaftPeerPB.Role role = 3;
+  optional consensus.metadata.RaftPeerPB.Role role = 3;
 
   // Set if there an error retrieving the registration information.
   optional MasterErrorPB error = 4;
@@ -1035,7 +1035,7 @@ message GetMasterRegistrationResponsePB {
   optional string cluster_id = 5;
 
   // This server's membership type in the consensus configuration.
-  optional consensus.RaftPeerPB.MemberType member_type = 6;
+  optional consensus.metadata.RaftPeerPB.MemberType member_type = 6;
 }
 
 // ListMastersRequest/Response: get information about all of the known

@@ -20,7 +20,7 @@ package kudu.tserver;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/tserver";
 
 import "kudu/common/common.proto";
-import "kudu/consensus/metadata.proto";
+import "kudu/consensus/metadata/metadata.proto";
 import "kudu/rpc/rpc_header.proto";
 import "kudu/tablet/metadata.proto";
 import "kudu/transactions/transactions.proto";
@@ -175,7 +175,7 @@ message CreateTabletRequestPB {
   optional PartitionSchemaPB partition_schema = 10;
 
   // Initial consensus configuration for the tablet.
-  required consensus.RaftConfigPB config = 7;
+  required consensus.metadata.RaftConfigPB config = 7;
 
   // The table's extra-config.
   optional TableExtraConfigPB extra_config = 11;

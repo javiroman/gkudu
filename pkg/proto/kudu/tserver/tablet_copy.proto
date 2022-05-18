@@ -20,7 +20,7 @@ package kudu.tserver;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/tserver";
 
 import "kudu/common/common.proto";
-import "kudu/consensus/metadata.proto";
+import "kudu/consensus/metadata/metadata.proto";
 import "kudu/fs/fs.proto";
 import "kudu/rpc/rpc_header.proto";
 import "kudu/tablet/metadata.proto";
@@ -116,7 +116,7 @@ message BeginTabletCopySessionResponsePB {
 
   // A snapshot of the consensus state at the time that the
   // tablet copy session was started.
-  required consensus.ConsensusStatePB initial_cstate = 5;
+  required consensus.metadata.ConsensusStatePB initial_cstate = 5;
 
   // permanent_uuid of the responding peer.
   optional bytes responder_uuid = 6;

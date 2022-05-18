@@ -15,9 +15,9 @@
 // specific language governing permissions and limitations
 // under the License.
 syntax = "proto2";
-package kudu.consensus;
+package kudu.consensus.opid;
 
-option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/consensus";
+option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/consensus/opid";
 
 // An id for a generic state machine operation. Composed of the leaders' term
 // plus the index of the operation in that term, e.g., the <index>th operation

@@ -20,7 +20,7 @@ package kudu.tablet;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/tablet";
 
 import "kudu/common/common.proto";
-import "kudu/consensus/opid.proto";
+import "kudu/consensus/opid/opid.proto";
 import "kudu/fs/fs.proto";
 
 // ============================================================================
@@ -165,7 +165,7 @@ message TabletSuperBlockPB {
   // For tablets that have been tombstoned, stores the last OpId stored in the
   // WAL before tombstoning.
   // Only relevant for TOMBSTONED tablets.
-  optional consensus.OpId tombstone_last_logged_opid = 12;
+  optional consensus.opid.OpId tombstone_last_logged_opid = 12;
 
   // Tablet data is spread across a data directory group. If this is not set
   // and the tablet state is TABLET_DATA_READY, it is assumed that the data is

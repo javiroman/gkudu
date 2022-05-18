@@ -13,4 +13,5 @@ func main() {
 	c := client.Build()
 
 	fmt.Println(c)
+	client.TestCoon()
 }

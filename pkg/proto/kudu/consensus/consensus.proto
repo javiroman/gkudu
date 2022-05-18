@@ -20,8 +20,8 @@ package kudu.consensus;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/consensus";
 
 import "kudu/common/common.proto";
-import "kudu/consensus/metadata.proto";
-import "kudu/consensus/opid.proto";
+import "kudu/consensus/metadata/metadata.proto";
+import "kudu/consensus/opid/opid.proto";
 import "kudu/consensus/replica_management.proto";
 import "kudu/rpc/rpc_header.proto";
 import "kudu/tablet/metadata.proto";
@@ -111,10 +111,10 @@ message ChangeConfigRecordPB {
   required bytes tablet_id = 1;
 
   // The old committed configuration config for verification purposes.
-  required RaftConfigPB old_config = 2;
+  required metadata.RaftConfigPB old_config = 2;
 
   // The new configuration to set the configuration to.
-  required RaftConfigPB new_config = 3;
+  required metadata.RaftConfigPB new_config = 3;
 }
 
 enum ChangeConfigType {
@@ -142,7 +142,7 @@ message ChangeConfigRequestPB {
   // The peer to add or remove.
   // When 'type' == ADD_PEER, both the permanent_uuid and last_known_addr
   // fields must be set. Otherwise, only the permanent_uuid field is required.
-  optional RaftPeerPB server = 3;
+  optional metadata.RaftPeerPB server = 3;
 
   // The OpId index of the committed config to replace.
   // This optional parameter is here to provide an atomic (compare-and-swap)
@@ -160,7 +160,7 @@ message BulkChangeConfigRequestPB {
     optional ChangeConfigType type = 1;
     // The peer to add, remove, or modify.
     // The same rules apply here as above in ChangeConfigRequestPB.
-    optional RaftPeerPB peer = 2;
+    optional metadata.RaftPeerPB peer = 2;
   }
 
   // UUID of server this request is addressed to.
@@ -182,7 +182,7 @@ message ChangeConfigResponsePB {
   optional tserver.TabletServerErrorPB error = 1;
 
   // Updated configuration after changing the config.
-  optional RaftPeerPB new_config = 2;
+  optional metadata.RaftPeerPB new_config = 2;
 
   // The timestamp chosen by the server for this change config operation.
   // TODO: At the time of writing, this field is never set in the response.
@@ -195,7 +195,7 @@ message ChangeConfigResponsePB {
 // commit.
 message ReplicateMsg {
   // The Raft operation ID (term and index) being replicated.
-  required OpId id = 1;
+  required opid.OpId id = 1;
   // The (hybrid or logical) timestamp assigned to this message.
   required fixed64 timestamp = 2;
   // optional ExternalConsistencyMode external_consistency_mode = 3 [default = NO_CONSISTENCY];
@@ -217,7 +217,7 @@ message ReplicateMsg {
 message CommitMsg {
   required OperationType op_type = 1;
   // the id of the message this commit pertains to
-  optional OpId commited_op_id = 2;
+  optional opid.OpId commited_op_id = 2;
   // The operations that were applied and/or failed in this op.
   optional tablet.TxResultPB result = 3;
 }
@@ -242,7 +242,7 @@ message NoOpRequestPB {
 message ConsensusStatusPB {
 
   // The last message received (and replicated) by the peer.
-  required OpId last_received = 1;
+  required opid.OpId last_received = 1;
 
   // The id of the last op that was replicated by the current leader.
   // This doesn't necessarily mean that the term of this op equals the current
@@ -259,7 +259,7 @@ message ConsensusStatusPB {
   // truncate the batch if an operation in the middle of the batch fails
   // to prepare (eg due to memory limiting). In that case, the leader
   // will get a success response but still need to re-send some operations.
-  optional OpId last_received_current_leader = 4;
+  optional opid.OpId last_received_current_leader = 4;
 
   // The last committed index that is known to the peer.
   optional int64 last_committed_idx = 2;
@@ -352,7 +352,7 @@ message ConsensusRequestPB {
   // last operation.
   //
   // This must be set if 'ops' is non-empty.
-  optional OpId preceding_id = 4;
+  optional opid.OpId preceding_id = 4;
 
   // The index of the last committed operation in the configuration. This is the
   // index of the last operation the leader deemed committed from a consensus
@@ -364,7 +364,7 @@ message ConsensusRequestPB {
   // Deprecated field used in Kudu 0.10.0 and earlier. Remains here to prevent
   // accidental reuse and provide a nicer error message if the user attempts
   // a rolling upgrade.
-  optional OpId DEPRECATED_committed_index = 5;
+  optional opid.OpId DEPRECATED_committed_index = 5;
 
   // Sequence of operations to be replicated by this peer.
   // These will be committed when committed_index advances above their
@@ -417,7 +417,7 @@ message ConsensusResponsePB {
 
 // A message reflecting the status of an in-flight op.
 message OpStatusPB {
-  required OpId op_id = 1;
+  required opid.OpId op_id = 1;
   required OperationType op_type = 2;
   // Time the op has been in flight.
   required int64 running_for_micros = 3;
@@ -498,7 +498,7 @@ message GetLastOpIdRequestPB {
 }
 
 message GetLastOpIdResponsePB {
-  optional OpId opid = 1;
+  optional opid.OpId opid = 1;
     // A generic error message (such as tablet not found).
   optional tserver.TabletServerErrorPB error = 2;
 }
@@ -527,7 +527,7 @@ message GetConsensusStateRequestPB {
 message GetConsensusStateResponsePB {
   message TabletConsensusInfoPB {
     required bytes tablet_id = 1;
-    optional ConsensusStatePB cstate = 2;
+    optional metadata.ConsensusStatePB cstate = 2;
   }
   repeated TabletConsensusInfoPB tablets = 1;
 
@@ -571,7 +571,7 @@ message UnsafeChangeConfigRequestPB {
   // The peers specified in the 'new_config' are required to be a
   // subset of (or equal to) the peers in the committed config on the
   // destination replica.
-  required RaftConfigPB new_config = 4;
+  required metadata.RaftConfigPB new_config = 4;
 }
 
 // The unsafe change configuration response. 'error' field is set if operation failed.

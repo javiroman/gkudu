@@ -20,7 +20,7 @@ package kudu.tserver;
 option go_package = "github.com/javiroman/gkudu/pkg/proto/kudu/tserver";
 
 import "kudu/common/common.proto";
-import "kudu/consensus/metadata.proto";
+import "kudu/consensus/metadata/metadata.proto";
 import "kudu/security/token.proto";
 import "kudu/tablet/tablet.proto";
 import "kudu/util/pb_util.proto";
@@ -213,7 +213,7 @@ message ListTabletsResponsePB {
     optional SchemaPB schema = 2;
     optional PartitionSchemaPB partition_schema = 3;
     optional uint32 schema_version = 4;
-    optional consensus.RaftPeerPB.Role role = 5;
+    optional consensus.metadata.RaftPeerPB.Role role = 5;
   }
 
   repeated StatusAndSchemaPB status_and_schema = 2;
