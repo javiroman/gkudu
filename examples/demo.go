@@ -9,10 +9,8 @@ func main() {
 	fmt.Println("Go Kudu Library")
 
 	client := kudu.NewClientBuilder()
-	client.AddMasterServerAddr("127.0.0.1")
-	c, i := client.Build()
+	client.AddMasterServerAddr("kudu-master1.node.keedio.cloud:7051")
+	c := client.Build()
 
-	fmt.Println(c, i)
-
-	fmt.Println(kudu.TestPB())
+	fmt.Println(c)
 }

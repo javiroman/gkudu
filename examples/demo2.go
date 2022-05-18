@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	kudu "github.com/javiroman/gkudu/pkg"
+)
 
 const kTableName = "test"
 
