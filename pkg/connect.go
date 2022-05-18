@@ -3,6 +3,7 @@
 package gkudu
 
 import (
+	"context"
 	"github.com/javiroman/gkudu/pkg/proto/kudu/client"
 	"github.com/javiroman/gkudu/pkg/proto/kudu/common"
 	pb "github.com/javiroman/gkudu/pkg/proto/kudu/master"
@@ -11,6 +12,7 @@ import (
 	"log"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // Connection comment ihere
@@ -59,17 +61,13 @@ func (c *Connection) TestCoon() {
 	}
 	defer conn.Close()
 
-	c := pb.ListMasters()
-	/*
-		c := pb.NewGreeterClient(conn)
+	a := pb.NewMasterServiceClient(conn)
 
-		// Contact the server and print out its response.
-		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-		defer cancel()
-		r, err := c.SayHello(ctx, &pb.HelloRequest{Name: *name})
-		if err != nil {
-			log.Fatalf("could not greet: %v", err)
-		}
-		log.Printf("Greeting: %s", r.GetMessage())
-	*/
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	r, err := a.ListMasters(ctx, &pb.ListMastersRequestPB{})
+	if err != nil {
+		log.Fatalf("ListMasters error: %v", err)
+	}
+	log.Printf("Greeting: %s", r.GetMasters())
 }

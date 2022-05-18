@@ -19,7 +19,8 @@ generate:
 	protoc --proto_path=$(PROTO_INCLUDE_FOLDERS) \
            --go_opt=paths=source_relative \
            --go_out=$(GENERATE_FILES_FOLDER)  \
-           --go-grpc_out=. \
+           --go-grpc_opt=paths=source_relative \
+           --go-grpc_out=$(GENERATE_FILES_FOLDER) \
            $(FILES)
 
 doc:
