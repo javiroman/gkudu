@@ -62,9 +62,9 @@ func (c *Connection) TestCoon() {
 	defer conn.Close()
 
 	a := pb.NewMasterServiceClient(conn)
-
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
+
 	r, err := a.ListMasters(ctx, &pb.ListMastersRequestPB{})
 	if err != nil {
 		log.Fatalf("ListMasters error: %v", err)

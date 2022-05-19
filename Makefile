@@ -1,5 +1,4 @@
 .DEFAULT_GOAL := demo
-PACKAGE = $(shell head -1 go.mod | awk '{print $$2}')
 PROTO_INCLUDE_FOLDERS = $(shell find pkg/proto -type d | tr '\n' ':')
 GENERATE_FILES_FOLDER = pkg/proto
 FILES = $(shell find pkg/proto -name *.proto)
@@ -19,8 +18,6 @@ generate:
 	protoc --proto_path=$(PROTO_INCLUDE_FOLDERS) \
            --go_opt=paths=source_relative \
            --go_out=$(GENERATE_FILES_FOLDER)  \
-           --go-grpc_opt=paths=source_relative \
-           --go-grpc_out=$(GENERATE_FILES_FOLDER) \
            $(FILES)
 
 doc:
